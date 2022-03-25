@@ -13,7 +13,7 @@ import static hooks.GetConfig.getConfigurationValue;
 
 public class ts_Jira {
     @Test
-    @Tag("")
+    @Tag("123")
     @DisplayName("Проверка количества задач")
     public void Test1() {
         openPage(getConfigurationValue("AutorizationURL"));
@@ -27,7 +27,7 @@ public class ts_Jira {
     }
 
     @Test
-    @Tag("")
+    @Tag("123")
     @DisplayName("Создание задачи. Изменение статусов.")
     public void Test2() {
         openPage(getConfigurationValue("AutorizationURL"));
