@@ -2,11 +2,9 @@ package PageObject.PageSteps;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Step;
-import org.openqa.selenium.WebElement;
 
 import static PageObject.PageElem.AutorizationPage.*;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.page;
 
 public class AutorizationSteps {
 

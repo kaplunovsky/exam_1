@@ -4,14 +4,7 @@ import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
-
-import java.util.List;
 
 import static PageObject.PageElem.MainPage.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -26,8 +19,6 @@ public class MainSteps {
     public static void checkValue(){
         int HeadValue = Integer.parseInt(($(TaskCount).text().split(" "))[0]);
         int ListValue = $$(By.xpath(listTask)).size();
-
-        //System.out.println("Кол-во в шапке/списке:  " + HeadValue + " / " + ListValue);
 
         Assert.assertEquals(HeadValue, ListValue);
     }
