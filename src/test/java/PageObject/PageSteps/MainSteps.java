@@ -1,26 +1,25 @@
 package PageObject.PageSteps;
 
+import PageObject.PageElem.MainPage;
 import io.qameta.allure.Step;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
-import static PageObject.PageElem.MainPage.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class MainSteps {
+public class MainSteps extends MainPage {
 
+    @Step("Проверка открытия страницы")
     public static void isOpened() {
         $x(Header).exists();
     }
 
-    @Step("Проверка количества задач d шапке/списке {HeadValue}/{ListValue}")
+    @Step("Проверка количества задач в шапке/списке")
     public static void checkValue(){
-        int HeadValue = Integer.parseInt(($(TaskCount).text().split(" "))[0]);
+        int HeadValue = Integer.parseInt(($x(TaskCount).text().split(" "))[0]);
         int ListValue = $$(By.xpath(listTask)).size();
-
-        Assert.assertEquals(HeadValue, ListValue);
+        Assertions.assertEquals(HeadValue, ListValue);
     }
 
     @Step("Создание задачи. Summary: {SummaryText}")
@@ -28,31 +27,31 @@ public class MainSteps {
 
         $x(btnCreate).click();
         sleep(1000);
+
         $x(fldSummary).click();
         $x(fldSummary).sendKeys(SummaryText);
-        //      fldDesc.click();       // element not interactable
-        //      fldDesc.sendKeys(DescText);  // element not interactable
         $x(lnkAssignToMe).click();
-        $(btnCreateSub).click();
+        sleep(2000);
+        $x(btnCreateSub).click();
     }
 
     @Step("Изменения статусов.")
     public static void ChangeStatus(String SummaryText){
-        $(navTasks).click();
-        $(lnkNewSearch).click();
-        $(fldSearchQuery).click();
-        $(fldSearchQuery).setValue(SummaryText);
-        $(fldSearchQuery).sendKeys(Keys.ENTER);
-        $(lnkInProgress).click();
+        $x(navTasks).click();
+        $x(lnkNewSearch).click();
+        $x(fldSearchQuery).click();
+        $x(fldSearchQuery).setValue(SummaryText);
+        $x(fldSearchQuery).sendKeys(Keys.ENTER);
+        $x(lnkInProgress).click();
         sleep(1000);
-        $(lnkBProcess).click();
-        $(lnkResolved).click();
+        $x(lnkBProcess).click();
+        $x(lnkResolved).click();
     }
 
     @Step("Проверка статуса {statusvalue}")
     public static void AssertValue(String statusvalue) {
         sleep(1000);
-        Assertions.assertEquals($(assertValue).text(), statusvalue);
+        Assertions.assertEquals($x(assertValue).text(), statusvalue);
 
     }
 }

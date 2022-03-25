@@ -1,12 +1,12 @@
 package PageObject.PageSteps;
 
+import PageObject.PageElem.AutorizationPage;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Step;
 
-import static PageObject.PageElem.AutorizationPage.*;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class AutorizationSteps {
+public class AutorizationSteps extends AutorizationPage {
 
     @Step("Открытие страницы {url}")
     public static void openPage(String url){

@@ -1,19 +1,19 @@
 package steps;
 
-import PageObject.PageSteps.AutorizationSteps;
-import PageObject.PageSteps.MainSteps;
-import com.codeborne.selenide.Selenide;
+import hooks.WebHooks;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static PageObject.PageSteps.AutorizationSteps.*;
 import static PageObject.PageSteps.MainSteps.*;
+import static com.codeborne.selenide.Selenide.sleep;
 import static hooks.GetConfig.getConfigurationValue;
 
-public class ts_Jira {
+public class JiraTest extends WebHooks {
+
     @Test
-    @Tag("123")
+    @Tag("Jira_Test_1")
     @DisplayName("Проверка количества задач")
     public void Test1() {
         openPage(getConfigurationValue("AutorizationURL"));
@@ -21,13 +21,14 @@ public class ts_Jira {
         clicButtonPassword(getConfigurationValue("password"));
         clicButtonIn();
 
-        Selenide.open(getConfigurationValue("MainURL"), MainSteps.class);
+        openPage(getConfigurationValue("MainURL"));
         isOpened();
+        sleep(1000);
         checkValue();
     }
 
     @Test
-    @Tag("123")
+    @Tag("Jira_Test_2")
     @DisplayName("Создание задачи. Изменение статусов.")
     public void Test2() {
         openPage(getConfigurationValue("AutorizationURL"));
@@ -37,8 +38,9 @@ public class ts_Jira {
 
         openPage(getConfigurationValue("AutorizationURL"));
         isOpened();
-        CreateTask(getConfigurationValue("SummaryText"), getConfigurationValue("DescriptionText"));
+        CreateTask(getConfigurationValue("SummaryText" )+ "2", getConfigurationValue("DescriptionText"));
         ChangeStatus(getConfigurationValue("SummaryText"));
-        AssertValue(getConfigurationValue("AssertTaskStatus"));
+        AssertValue("ГОТОВО");
     }
+
 }
